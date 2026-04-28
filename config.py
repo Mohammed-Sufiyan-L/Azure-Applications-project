@@ -14,7 +14,7 @@ class Config(object):
     SQL_USER_NAME = os.environ.get('SQL_USER_NAME') or 'cmsadmin'
     SQL_PASSWORD = os.environ.get('SQL_PASSWORD') or 'Accenture2004!'
 
-   SQLALCHEMY_DATABASE_URI = (
+  SQLALCHEMY_DATABASE_URI = (
     'mssql+pyodbc://' + 
     (os.environ.get('SQL_USER_NAME') or 'cmsadmin') + ':' +
     (os.environ.get('SQL_PASSWORD') or 'Accenture2004!') + '@' +

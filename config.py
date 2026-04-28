@@ -14,7 +14,14 @@ class Config(object):
     SQL_USER_NAME = os.environ.get('SQL_USER_NAME') or 'cmsadmin'
     SQL_PASSWORD = os.environ.get('SQL_PASSWORD') or 'Accenture2004!'
 
-    SQLALCHEMY_DATABASE_URI = 'mssql+pyodbc://cmsadmin:Accenture@2004@cmsprojectserver2004.database.windows.net,1433/cms?driver=ODBC+Driver+18+for+SQL+Server&Encrypt=yes&TrustServerCertificate=no&Connection+Timeout=30'
+   SQLALCHEMY_DATABASE_URI = (
+    'mssql+pyodbc://' + 
+    (os.environ.get('SQL_USER_NAME') or 'cmsadmin') + ':' +
+    (os.environ.get('SQL_PASSWORD') or 'Accenture2004!') + '@' +
+    (os.environ.get('SQL_SERVER') or 'cmsprojectserver2004.database.windows.net') + ':1433/' +
+    (os.environ.get('SQL_DATABASE') or 'cms') +
+    '?driver=ODBC+Driver+18+for+SQL+Server&Encrypt=yes&TrustServerCertificate=no&Connection+Timeout=30'
+)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     CLIENT_SECRET = os.environ.get('CLIENT_SECRET') or 'Mx88Q~qxejQvp_PcsnX1-mZXWhvUq67t5FnO6b4N'

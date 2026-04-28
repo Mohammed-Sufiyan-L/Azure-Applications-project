@@ -13,6 +13,8 @@ app.config.from_object(Config)
 # TODO: Add any logging levels and handlers with app.logger
 Session(app)
 db = SQLAlchemy(app)
+with app.app_context():
+    db.create_all()
 login = LoginManager(app)
 login.login_view = 'login'
 

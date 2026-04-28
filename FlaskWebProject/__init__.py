@@ -1,3 +1,4 @@
+import os
 import logging
 from flask import Flask
 from config import Config
@@ -8,6 +9,9 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.config['SESSION_FILE_DIR'] = '/tmp/flask_session'
+app.config['SESSION_TYPE'] = 'filesystem'
+os.makedirs('/tmp/flask_session', exist_ok=True)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 Session(app)

@@ -42,7 +42,6 @@ def new_post():
         form=form
     )
 
-
 @app.route('/post/<int:id>', methods=['GET', 'POST'])
 @login_required
 def post(id):
@@ -70,7 +69,7 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
-        app.logger.info('User %s logged in successfully', form.username.data)
+        app.logger.warning('User %s logged in successfully', form.username.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('home')
@@ -96,7 +95,7 @@ def authorized():
         session["user"] = result.get("id_token_claims")
         user = User.query.filter_by(username="admin").first()
         login_user(user)
-        app.logger.info('User logged in successfully via Microsoft')
+        app.logger.warning('User logged in successfully via Microsoft')
         _save_cache(cache)
     return redirect(url_for('home'))
 
